@@ -1,13 +1,30 @@
 ---
-title: My Awesome Site
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write a short description here.
-baseurl: ""
-url: "http://yourdomain.com"
+title: "BZ Nomad"
+description: "TzuMinHuang 的個人網站：履歷、作品、技術與語言學習"
+baseurl: "" # GitHub Pages 用 root
+url: "https://tzuminhuang.github.io"
+
 theme: minimal-mistakes-jekyll
 
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-archives
+  - jekyll-paginate
+  - jekyll-include-cache
 
+author:
+  name: "TzuMin Huang"
+  avatar: "/assets/images/avatar.jpg"
+  bio: "Java / SpringBoot 後端工程師。語言愛好者，打造 BenVoyage 品牌。"
+  location: "Taiwan"
+  links:
+    - label: "GitHub"
+      url: "https://github.com/tzuminhuang"
+    - label: "LinkedIn"
+      url: "https://linkedin.com/in/your-profile"
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/

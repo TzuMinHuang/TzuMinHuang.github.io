@@ -1,0 +1,11 @@
+main:
+  - title: "首頁"
+    url: "/"
+  - title: "技術文章"
+    url: "/blog/"
+  - title: "專案與作品"
+    url: "/projects/"
+  - title: "BenVoyage"
+    url: "/benvoyage"
+  - title: "關於我"
+    url: "/about/"
