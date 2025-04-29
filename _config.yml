@@ -4,7 +4,7 @@ description: "TzuMinHuang 的個人網站：履歷、作品、技術與語言學
 baseurl: "" # GitHub Pages 用 root
 url: "https://tzuminhuang.github.io"
 
-theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes"
 
 plugins:
   - jekyll-feed
@@ -12,6 +12,7 @@ plugins:
   - jekyll-archives
   - jekyll-paginate
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 author:
   name: "TzuMin Huang"
