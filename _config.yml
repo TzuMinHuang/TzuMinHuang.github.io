@@ -54,6 +54,7 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 author:
   name   : "TzuMin Huang"
@@ -64,8 +65,8 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/tzuminhuang"
     - label: "LinkedIn"
-      icon: "fab fa-linkedin"
-      url: "https://github.com/tzuminhuang"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/tzuminhuang"
   #   - label: "Website"
   #     icon: "fas fa-fw fa-link"
   #     url: "https://"
@@ -82,8 +83,8 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/tzuminhuang"
     - label: "LinkedIn"
-      icon: "fab fa-linkedin"
-      url: "https://github.com/tzuminhuang"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/tzuminhuang"
   # - label: "Twitter"
   #   icon: "fab fa-fw fa-twitter-square"
   #   url: "https://twitter.com/"
@@ -117,3 +118,7 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+collections:
+  projects:
+    output: true

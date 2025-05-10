@@ -1,0 +1,728 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>從零打造一個智慧機器人：我的機器人學習之旅 - BZ Nomad</title>
+<meta name="description" content="最近在閱讀《自然語言處理最佳實務》這本書，裡面有一章在講解「客服機器人的應用場景與技術架構」，看完之後我心裡冒出一個念頭：「不如自己來實作一套看看？」這不只是對書中概念的實驗，也是一場實戰練習。">
+
+
+  <meta name="author" content="TzuMin Huang">
+  
+  <meta property="article:author" content="TzuMin Huang">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="BZ Nomad">
+<meta property="og:title" content="從零打造一個智慧機器人：我的機器人學習之旅">
+<meta property="og:url" content="http://localhost:4000/chatbot/web-chat-1/">
+
+
+  <meta property="og:description" content="最近在閱讀《自然語言處理最佳實務》這本書，裡面有一章在講解「客服機器人的應用場景與技術架構」，看完之後我心裡冒出一個念頭：「不如自己來實作一套看看？」這不只是對書中概念的實驗，也是一場實戰練習。">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-04-04T00:00:00+08:00">
+
+
+
+  <meta property="article:modified_time" content="2025-04-05T05:20:02+08:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/chatbot/web-chat-1/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="BZ Nomad Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          BZ Nomad
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/projects/"
+                
+                
+              >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/benvoyage"
+                
+                
+              >BenVoyage</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/bio-photo.jpg" alt="TzuMin Huang" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">TzuMin Huang</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Java / SpringBoot 後端工程師。語言愛好者，打造 BenVoyage 品牌。</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://github.com/tzuminhuang" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://linkedin.com/in/tzuminhuang" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="從零打造一個智慧機器人：我的機器人學習之旅">
+    <meta itemprop="description" content="最近在閱讀《自然語言處理最佳實務》這本書，裡面有一章在講解「客服機器人的應用場景與技術架構」，看完之後我心裡冒出一個念頭：「不如自己來實作一套看看？」這不只是對書中概念的實驗，也是一場實戰練習。">
+    <meta itemprop="datePublished" content="2025-04-04T00:00:00+08:00">
+    <meta itemprop="dateModified" content="2025-04-05T05:20:02+08:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/chatbot/web-chat-1/" itemprop="url">從零打造一個智慧機器人：我的機器人學習之旅
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>最近在閱讀《自然語言處理最佳實務》這本書，裡面有一章在講解「客服機器人的應用場景與技術架構」，看完之後我心裡冒出一個念頭：「不如自己來實作一套看看？」這不只是對書中概念的實驗，也是一場實戰練習。</p>
+
+<p>我設定的第一個目標是打造一個具備基本功能的客服對話系統，包含：</p>
+<ul>
+  <li>FAQ 查詢回答</li>
+  <li>多輪對話處理</li>
+  <li>支援轉接真人客服</li>
+</ul>
+
+<p>技術上，我採用了自己熟悉的技術棧：</p>
+<ul>
+  <li>Spring Boot 作為主架構</li>
+  <li>RabbitMQ 負責模組解耦與訊息分發</li>
+  <li>PostgreSQL 儲存對話紀錄與知識資料</li>
+  <li>Docker 協助環境部署與管理</li>
+  <li>Redis、html、css、javascript…</li>
+  <li>Rasa</li>
+</ul>
+
+<p>第一版很快就做出來了，但……效果並不如我預期的好。</p>
+
+<h2 id="做完第一版我學到什麼">做完第一版，我學到什麼？</h2>
+
+<p>雖然功能完成了，但整體對話體驗不夠自然、有些僵硬，也難以應對複雜或模糊的問題。這讓我開始認真思考一件事：</p>
+
+<blockquote>
+  <p>「客服機器人，到底該怎麼對話？」</p>
+</blockquote>
+
+<p>在這過程中，我逐漸意識到，客服對話其實就是模仿人與人之間的溝通流程：</p>
+<ul>
+  <li>使用者一句、系統一句</li>
+  <li>使用者提出意圖、系統嘗試理解並給出回應</li>
+  <li>解決一個問題，再進入下一個問題</li>
+</ul>
+
+<p>乍看之下很簡單，但實際情況卻複雜得多。使用者有可能：</p>
+<ul>
+  <li>話題跳來跳去</li>
+  <li>一次輸入多個問題</li>
+  <li>無法清楚描述問題本身</li>
+  <li>中途修改原本的問題</li>
+</ul>
+
+<p>因此，我重新審視整體架構，決定設計第二版，一個<strong>更接近「人類對話邏輯」的系統</strong>。</p>
+
+<h2 id="我眼中的客服系統核心邏輯">我眼中的客服系統核心邏輯</h2>
+
+<p>要讓一個對話機器人有「對話能力」，我認為需要具備以下幾個核心模組：</p>
+
+<h3 id="1-意圖辨識intent-detection">1. 意圖辨識（Intent Detection）</h3>
+<p>我們要能辨識使用者是要查詢資訊、投訴、詢問訂單進度，還是只是說「你好」。不同意圖決定了回應策略與流程走向。</p>
+
+<h3 id="2-對話狀態管理state-management">2. 對話狀態管理（State Management）</h3>
+<p>對話不是 stateless 的，系統需要知道現在對話進行到哪，例如：</p>
+<ul>
+  <li>使用者剛提問，還沒回覆</li>
+  <li>等待使用者補充資料</li>
+  <li>進入詢問流程中</li>
+</ul>
+
+<p>這可以用有限狀態機或上下文物件來管理。</p>
+
+<h3 id="3-回應策略response-strategy">3. 回應策略（Response Strategy）</h3>
+<p>不管是從 FAQ、資料庫、還是 AI 模型產生回應，核心是「用什麼邏輯找出最合理的回覆方式」。</p>
+
+<h3 id="4-多輪對話處理multi-turn">4. 多輪對話處理（Multi-turn）</h3>
+<p>簡單的問答不難，難的是使用者說「那上次訂單呢？」這時系統要能記住前文，知道「上次」是什麼意思。</p>
+
+<h3 id="5-fallback--真人轉接">5. Fallback &amp; 真人轉接</h3>
+<p>當機器無法理解或解決問題時，要有退路。這可能是請使用者重說、顯示常見問題、或直接轉真人客服。</p>
+
+<h2 id="下一步我打算這樣設計第二版">下一步：我打算這樣設計第二版</h2>
+
+<p>第二版我會從這幾個方向開始著手：</p>
+
+<ul>
+  <li>加入簡單的意圖分類器（規則 or 模型）</li>
+  <li>建構一套會記憶對話上下文的管理模組</li>
+  <li>將流程抽象化為任務狀態 + 回應策略</li>
+  <li>儲存對話快照，確保多輪能續接</li>
+  <li>加入 fallback 模組，預設五秒內無回應就自動轉接</li>
+</ul>
+
+<p>這將是一套「從流程出發設計的客服系統」，不只是跑得動，更希望能「聊得通」。</p>
+
+<h2 id="結語">結語</h2>
+
+<p>這段過程讓我意識到，客服機器人不只是 NLP 應用，它其實是一門關於「理解人、引導人、回應人」的工程。從第一版的碰壁到第二版的規劃，我學到最重要的一件事是：</p>
+
+<blockquote>
+  <p>不要只是寫功能，要設計對話。</p>
+</blockquote>
+
+<p>也希望這篇筆記能幫助和我一樣對 NLP 與系統設計有興趣的朋友們。如果你也正在做客服系統，或是想討論 NLP 設計邏輯，歡迎留言交流！</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#chat" class="page__taxonomy-item p-category" rel="tag">chat</a><span class="sep">, </span>
+    
+      <a href="/tags/#chatbot" class="page__taxonomy-item p-category" rel="tag">chatbot</a><span class="sep">, </span>
+    
+      <a href="/tags/#nlp" class="page__taxonomy-item p-category" rel="tag">nlp</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#chatbot" class="page__taxonomy-item p-category" rel="tag">Chatbot</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-04-04">April 4, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=%E5%BE%9E%E9%9B%B6%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E6%99%BA%E6%85%A7%E6%A9%9F%E5%99%A8%E4%BA%BA%EF%BC%9A%E6%88%91%E7%9A%84%E6%A9%9F%E5%99%A8%E4%BA%BA%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%97%85%20http%3A%2F%2Flocalhost%3A4000%2Fchatbot%2Fweb-chat-1%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fchatbot%2Fweb-chat-1%2F" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/chatbot/web-chat-1/" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=%E5%BE%9E%E9%9B%B6%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E6%99%BA%E6%85%A7%E6%A9%9F%E5%99%A8%E4%BA%BA%EF%BC%9A%E6%88%91%E7%9A%84%E6%A9%9F%E5%99%A8%E4%BA%BA%E5%AD%B8%E7%BF%92%E4%B9%8B%E6%97%85%20http%3A%2F%2Flocalhost%3A4000%2Fchatbot%2Fweb-chat-1%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/security/web-security-3/" class="pagination--pager" title="資安學習心得｜打造具認證驗證功能的 Spring Gateway 防線">Previous</a>
+    
+    
+      <a href="/blog/web-chat-2/" class="pagination--pager" title="從實作出發，我重新思考客服機器人的本質與設計">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    
+<div class="page__related">
+  
+  <h2 class="page__related-title">You May Also Enjoy</h2>
+  <div class="grid__wrapper">
+    
+      
+      
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/web-chat-3/" rel="permalink">NLP × 電商 Chatbot 混合應用學習筆記
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/web-chat-2/" rel="permalink">從實作出發，我重新思考客服機器人的本質與設計
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="https://github.com">資安學習心得｜打造具認證驗證功能的 Spring Gateway 防線
+</a> <a href="/security/web-security-3/" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+
+    
+      
+      
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/security/web-security-2/" rel="permalink">資安學習心得｜後端API資安需知大全
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+
+    
+  </div>
+</div>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/tzuminhuang" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/tzuminhuang" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">BZ Nomad</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
