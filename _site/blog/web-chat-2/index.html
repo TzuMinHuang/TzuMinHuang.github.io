@@ -10,8 +10,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>從實作出發，我重新思考客服機器人的本質與設計 - BZ Nomad</title>
-<meta name="description" content="">
+<!-- begin _includes/seo.html --><title>我重新思考客服機器人的本質與設計——打造智慧機器人的系統規劃書 - BZ Nomad</title>
+<meta name="description" content="引言">
 
 
   <meta name="author" content="TzuMin Huang">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="BZ Nomad">
-<meta property="og:title" content="從實作出發，我重新思考客服機器人的本質與設計">
+<meta property="og:title" content="我重新思考客服機器人的本質與設計——打造智慧機器人的系統規劃書">
 <meta property="og:url" content="http://localhost:4000/blog/web-chat-2/">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="引言">
 
 
 
@@ -263,8 +263,8 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="從實作出發，我重新思考客服機器人的本質與設計">
-    <meta itemprop="description" content="">
+    <meta itemprop="headline" content="我重新思考客服機器人的本質與設計——打造智慧機器人的系統規劃書">
+    <meta itemprop="description" content="引言">
     <meta itemprop="datePublished" content="2025-04-07T00:00:00+08:00">
     <meta itemprop="dateModified" content="2025-04-08T05:20:02+08:00">
 
@@ -272,7 +272,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/blog/web-chat-2/" itemprop="url">從實作出發，我重新思考客服機器人的本質與設計
+            <a href="http://localhost:4000/blog/web-chat-2/" itemprop="url">我重新思考客服機器人的本質與設計——打造智慧機器人的系統規劃書
 </a>
           </h1>
           
@@ -301,7 +301,148 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <h2 id="引言">引言</h2>
+
+<p>在上一篇〈一個智慧機器人：我的機器人學習之旅〉中，我記錄了第一版客服機器人的實作過程與學習心得。但當我走過這段旅程後，我開始思考一個更根本的問題：「一個真正有用的客服機器人，本質應該是什麼？」這篇文章將從系統設計的角度，重新審視整體需求與架構，並提出我對未來客服機器人設計的完整規劃。</p>
+
+<hr />
+
+<h2 id="一問題定義我們需要什麼樣的客服機器人">一、問題定義：我們需要什麼樣的客服機器人？</h2>
+
+<ul>
+  <li>客戶在什麼情境下會使用客服？</li>
+  <li>為何「FAQ機器人」常常令人失望？</li>
+  <li>目標：打造<strong>更接近真人客服思維邏輯的系統</strong></li>
+</ul>
+
+<blockquote>
+  <p>「能夠理解上下文」、「知道什麼時候該轉真人」、「提供一致與可控的回應邏輯」才是本質。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="二核心目標與功能拆解">二、核心目標與功能拆解</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能模組</th>
+      <th>說明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FAQ 問答引擎</td>
+      <td>基於分類關鍵字、自定規則或向量搜尋技術</td>
+    </tr>
+    <tr>
+      <td>多輪對話模組</td>
+      <td>保存上下文（Context）、支援 Slot Filling 與任務導向對話</td>
+    </tr>
+    <tr>
+      <td>人工客服轉接</td>
+      <td>判斷時機轉接並保留歷史對話與上下文</td>
+    </tr>
+    <tr>
+      <td>系統管理後台</td>
+      <td>FAQ 編輯、分類標籤管理、日誌查詢</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="三技術選型與架構設計">三、技術選型與架構設計</h2>
+
+<h3 id="技術棧">技術棧：</h3>
+<ul>
+  <li>html + css + javascript</li>
+  <li>Spring Boot</li>
+  <li>RabbitMQ</li>
+  <li>PostgreSQL</li>
+  <li>Redis</li>
+  <li>Docker + docker-compose</li>
+</ul>
+
+<h3 id="系統分層架">系統分層架：</h3>
+<ol>
+  <li>客戶資料傳輸層</li>
+  <li>對話狀態管理</li>
+  <li>規則與策略層</li>
+  <li>商業應用層</li>
+</ol>
+
+<h3 id="資料傳輸示意圖">資料傳輸示意圖</h3>
+<p><img src="/assets/images/posts/data_translate.jpg" alt="data_translate" /></p>
+
+<hr />
+
+<h2 id="四關鍵模組設計細節">四、關鍵模組設計細節</h2>
+
+<h3 id="1-對話狀態機conversation-state-machine">1. 對話狀態機（Conversation State Machine）</h3>
+<ul>
+  <li>定義狀態：初始 / 問答中 / 等待補充資訊 / 轉真人 等</li>
+  <li>每個狀態對應動作與轉換條件（State Pattern）</li>
+</ul>
+
+<h3 id="2-問答模組faq-engine">2. 問答模組（FAQ Engine）</h3>
+<ul>
+  <li>實作方式：
+    <ul>
+      <li>規則式匹配（文字 + 類別 + 權重）</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-多輪對話模組">3. 多輪對話模組</h3>
+<ul>
+  <li>Slot-based 設計（如：預約餐廳要收集「時間」「人數」「聯絡方式」）</li>
+  <li>支援上下文補全與提問追問</li>
+</ul>
+
+<h3 id="4-人工轉接模組">4. 人工轉接模組</h3>
+<ul>
+  <li>轉接時機：關鍵字、罐頭回應失敗次數</li>
+  <li>轉接流程：鎖定客服、推送對話紀錄、</li>
+</ul>
+
+<hr />
+
+<h2 id="五使用者體驗與人性思維">五、使用者體驗與人性思維</h2>
+
+<ul>
+  <li>用戶其實不是要「聽機器人解釋」，而是「快速獲得解決方案」</li>
+  <li>故需要：<strong>快速回應 + 不拖延的轉真人機制</strong></li>
+  <li>回應語氣：避免過度冷冰冰、善用「語氣模板」</li>
+</ul>
+
+<hr />
+
+<h2 id="六部署與監控設計">六、部署與監控設計</h2>
+
+<ul>
+  <li>日誌監控（操作與異常）</li>
+  <li>指標觀測（API 成功率、客服轉接率）</li>
+  <li>FAQ 點擊次數與命中率分析</li>
+  <li>CI/CD（GitHub Actions + Docker）</li>
+</ul>
+
+<hr />
+
+<h2 id="七未來發展與改版方向">七、未來發展與改版方向</h2>
+
+<ul>
+  <li>支援自然語言理解（NLU）強化對話品質</li>
+  <li>將客服訓練數據轉為機器學習模型（自動標註常見意圖）</li>
+  <li>支援語音 / TTS 模組</li>
+  <li>OpenAI  整合（加速訓練與少樣本對話能力）</li>
+</ul>
+
+<hr />
+
+<h2 id="結語技術只是手段本質是理解用戶">結語：技術只是手段，本質是理解用戶</h2>
+
+<p>每一個模組的設計與選擇，是源於對「好用客服」的想像。這篇文章希望留下的不只是系統規劃，更是我對一個智慧機器人本質的重新詮釋。</p>
 
         
       </section>
@@ -354,7 +495,7 @@
       <section class="page__share">
   <h4 class="page__share-title">Share on</h4>
 
-  <a href="https://x.com/intent/tweet?text=%E5%BE%9E%E5%AF%A6%E4%BD%9C%E5%87%BA%E7%99%BC%EF%BC%8C%E6%88%91%E9%87%8D%E6%96%B0%E6%80%9D%E8%80%83%E5%AE%A2%E6%9C%8D%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E6%9C%AC%E8%B3%AA%E8%88%87%E8%A8%AD%E8%A8%88%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fweb-chat-2%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+  <a href="https://x.com/intent/tweet?text=%E6%88%91%E9%87%8D%E6%96%B0%E6%80%9D%E8%80%83%E5%AE%A2%E6%9C%8D%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E6%9C%AC%E8%B3%AA%E8%88%87%E8%A8%AD%E8%A8%88%E2%80%94%E2%80%94%E6%89%93%E9%80%A0%E6%99%BA%E6%85%A7%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E7%B3%BB%E7%B5%B1%E8%A6%8F%E5%8A%83%E6%9B%B8%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fweb-chat-2%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
     <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
   </a>
 
@@ -366,7 +507,7 @@
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
   </a>
 
-  <a href="https://bsky.app/intent/compose?text=%E5%BE%9E%E5%AF%A6%E4%BD%9C%E5%87%BA%E7%99%BC%EF%BC%8C%E6%88%91%E9%87%8D%E6%96%B0%E6%80%9D%E8%80%83%E5%AE%A2%E6%9C%8D%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E6%9C%AC%E8%B3%AA%E8%88%87%E8%A8%AD%E8%A8%88%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fweb-chat-2%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+  <a href="https://bsky.app/intent/compose?text=%E6%88%91%E9%87%8D%E6%96%B0%E6%80%9D%E8%80%83%E5%AE%A2%E6%9C%8D%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E6%9C%AC%E8%B3%AA%E8%88%87%E8%A8%AD%E8%A8%88%E2%80%94%E2%80%94%E6%89%93%E9%80%A0%E6%99%BA%E6%85%A7%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E7%B3%BB%E7%B5%B1%E8%A6%8F%E5%8A%83%E6%9B%B8%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fweb-chat-2%2F" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
     <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
   </a>
 </section>
@@ -378,7 +519,7 @@
       <a href="/chatbot/web-chat-1/" class="pagination--pager" title="從零打造一個智慧機器人：我的機器人學習之旅">Previous</a>
     
     
-      <a href="/blog/web-chat-3/" class="pagination--pager" title="NLP × 電商 Chatbot 混合應用學習筆記">Next</a>
+      <a href="/blog/web-chat-3/" class="pagination--pager" title="NLP × 電商 Chatbot 混合應用學習筆記：從規劃開始打造智慧助理">Next</a>
     
   </nav>
 
@@ -406,7 +547,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/blog/web-chat-3/" rel="permalink">NLP × 電商 Chatbot 混合應用學習筆記
+        <a href="/blog/web-chat-3/" rel="permalink">NLP × 電商 Chatbot 混合應用學習筆記：從規劃開始打造智慧助理
 </a>
       
     </h2>
@@ -432,6 +573,9 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">
+  將自然語言處理技術應用於實際場景，是我進一步理解 NLP 模組價值與邊界的起點。這份筆記記錄我如何從系統角度出發，構思一個結合 FAQ、推薦、客服引導的智慧 Chatbot 原型系統。
+
+
 </p>
   </article>
 </div>
@@ -474,88 +618,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">最近在閱讀《自然語言處理最佳實務》這本書，裡面有一章在講解「客服機器人的應用場景與技術架構」，看完之後我心裡冒出一個念頭：「不如自己來實作一套看看？」這不只是對書中概念的實驗，也是一場實戰練習。
 
-</p>
-  </article>
-</div>
-
-    
-      
-      
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="https://github.com">資安學習心得｜打造具認證驗證功能的 Spring Gateway 防線
-</a> <a href="/security/web-security-3/" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-
-    
-      
-      
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/security/web-security-2/" rel="permalink">資安學習心得｜後端API資安需知大全
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>

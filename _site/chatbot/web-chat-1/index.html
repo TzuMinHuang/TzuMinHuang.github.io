@@ -306,7 +306,6 @@
 <p>我設定的第一個目標是打造一個具備基本功能的客服對話系統，包含：</p>
 <ul>
   <li>FAQ 查詢回答</li>
-  <li>多輪對話處理</li>
   <li>支援轉接真人客服</li>
 </ul>
 
@@ -316,7 +315,11 @@
   <li>RabbitMQ 負責模組解耦與訊息分發</li>
   <li>PostgreSQL 儲存對話紀錄與知識資料</li>
   <li>Docker 協助環境部署與管理</li>
-  <li>Redis、html、css、javascript…</li>
+  <li>Redis 資料快取</li>
+</ul>
+
+<p>書本提到的機器人框架</p>
+<ul>
   <li>Rasa</li>
 </ul>
 
@@ -332,7 +335,7 @@
 
 <p>在這過程中，我逐漸意識到，客服對話其實就是模仿人與人之間的溝通流程：</p>
 <ul>
-  <li>使用者一句、系統一句</li>
+  <li>你說一句話、系統一句話，並繞著一個主題</li>
   <li>使用者提出意圖、系統嘗試理解並給出回應</li>
   <li>解決一個問題，再進入下一個問題</li>
 </ul>
@@ -351,15 +354,15 @@
 
 <p>要讓一個對話機器人有「對話能力」，我認為需要具備以下幾個核心模組：</p>
 
-<h3 id="1-意圖辨識intent-detection">1. 意圖辨識（Intent Detection）</h3>
+<h3 id="1-更強的意圖辨識intent-detection">1. 更強的意圖辨識（Intent Detection）</h3>
 <p>我們要能辨識使用者是要查詢資訊、投訴、詢問訂單進度，還是只是說「你好」。不同意圖決定了回應策略與流程走向。</p>
 
 <h3 id="2-對話狀態管理state-management">2. 對話狀態管理（State Management）</h3>
 <p>對話不是 stateless 的，系統需要知道現在對話進行到哪，例如：</p>
 <ul>
-  <li>使用者剛提問，還沒回覆</li>
-  <li>等待使用者補充資料</li>
-  <li>進入詢問流程中</li>
+  <li>使用者剛提問，但還未處理</li>
+  <li>目前正在等待使用者補充資料</li>
+  <li>進入詢問流程中，客戶有臨時有不一樣的想法</li>
 </ul>
 
 <p>這可以用有限狀態機或上下文物件來管理。</p>
@@ -378,7 +381,7 @@
 <p>第二版我會從這幾個方向開始著手：</p>
 
 <ul>
-  <li>加入簡單的意圖分類器（規則 or 模型）</li>
+  <li>加入意圖分類器（規則 or 模型）</li>
   <li>建構一套會記憶對話上下文的管理模組</li>
   <li>將流程抽象化為任務狀態 + 回應策略</li>
   <li>儲存對話快照，確保多輪能續接</li>
@@ -469,10 +472,10 @@
       
   <nav class="pagination">
     
-      <a href="/security/web-security-3/" class="pagination--pager" title="資安學習心得｜打造具認證驗證功能的 Spring Gateway 防線">Previous</a>
+      <a href="#" class="pagination--pager disabled">Previous</a>
     
     
-      <a href="/blog/web-chat-2/" class="pagination--pager" title="從實作出發，我重新思考客服機器人的本質與設計">Next</a>
+      <a href="/blog/web-chat-2/" class="pagination--pager" title="我重新思考客服機器人的本質與設計——打造智慧機器人的系統規劃書">Next</a>
     
   </nav>
 
@@ -500,7 +503,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/blog/web-chat-3/" rel="permalink">NLP × 電商 Chatbot 混合應用學習筆記
+        <a href="/blog/web-chat-3/" rel="permalink">NLP × 電商 Chatbot 混合應用學習筆記：從規劃開始打造智慧助理
 </a>
       
     </h2>
@@ -526,6 +529,9 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">
+  將自然語言處理技術應用於實際場景，是我進一步理解 NLP 模組價值與邊界的起點。這份筆記記錄我如何從系統角度出發，構思一個結合 FAQ、推薦、客服引導的智慧 Chatbot 原型系統。
+
+
 </p>
   </article>
 </div>
@@ -541,7 +547,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/blog/web-chat-2/" rel="permalink">從實作出發，我重新思考客服機器人的本質與設計
+        <a href="/blog/web-chat-2/" rel="permalink">我重新思考客服機器人的本質與設計——打造智慧機器人的系統規劃書
 </a>
       
     </h2>
@@ -566,89 +572,8 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
+    <p class="archive__item-excerpt" itemprop="description">引言
 
-    
-      
-      
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="https://github.com">資安學習心得｜打造具認證驗證功能的 Spring Gateway 防線
-</a> <a href="/security/web-security-3/" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-
-    
-      
-      
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/security/web-security-2/" rel="permalink">資安學習心得｜後端API資安需知大全
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
